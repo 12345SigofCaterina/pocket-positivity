@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pocket Positivity</title>
+  <style>
+    :root {
+      --bg: #fffdf8;
+      --panel: #ffffff;
+      --text: #2f3a3d;
+      --muted: #617074;
+      --accent: #7ac7c4;
+      --accent-2: #f7d97a;
+      --line: #e8ecec;
+      --shadow: 0 10px 30px rgba(0,0,0,0.07);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(180deg, #fffdf8 0%, #f7fbfb 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .container {
+      width: min(1100px, 92%);
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 22px 0;
+      position: sticky;
+      top: 0;
+      background: rgba(255,253,248,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(232,236,236,0.9);
+      z-index: 10;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+    }
+
+    .brand span {
+      color: #3f8e8b;
+    }
+
+    .nav a {
+      color: var(--muted);
+      text-decoration: none;
+      margin-left: 18px;
+      font-size: 0.96rem;
+    }
+
+    .hero {
+      padding: 72px 0 52px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 8px 14px;
+      background: #eef9f8;
+      color: #3f8e8b;
+      border-radius: 999px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(2.2rem, 4.5vw, 4.2rem);
+      line-height: 1.08;
+      margin: 0 0 18px;
+    }
+
+    .hero p {
+      font-size: 1.08rem;
+      color: var(--muted);
+      max-width: 62ch;
+    }
+
+    .buttons {
+      margin-top: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 20px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: transform 0.15s ease;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #153534;
+    }
+
+    .btn-secondary {
+      background: white;
+      color: var(--text);
+      border: 1px solid var(--line);
+    }
+
+    .card-preview {
+      background: var(--panel);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      padding: 28px;
+      border: 1px solid #edf1f1;
+    }
+
+    .mini-card {
+      background: linear-gradient(145deg, #fffaf0 0%, #ffffff 100%);
+      border: 1px solid #eef1ef;
+      border-radius: 18px;
+      padding: 22px;
+      margin-bottom: 16px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+    }
+
+    .mini-card strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1rem;
+    }
+
+    section {
+      padding: 34px 0;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      margin: 0 0 10px;
+    }
+
+    .section-intro {
+      color: var(--muted);
+      max-width: 70ch;
+      margin-bottom: 24px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+    }
+
+    .panel h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 1.15rem;
+    }
+
+    .panel p { color: var(--muted); }
+
+    .highlight {
+      background: linear-gradient(135deg, #f0fbfb 0%, #fff8e8 100%);
+      border: 1px solid #e7efef;
+      border-radius: 24px;
+      padding: 34px;
+      box-shadow: var(--shadow);
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    ul.clean {
+      padding-left: 18px;
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .cta {
+      text-align: center;
+      padding: 54px 0 70px;
+    }
+
+    .cta-box {
+      background: linear-gradient(135deg, #7ac7c4 0%, #f7d97a 100%);
+      padding: 40px 24px;
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .cta-box h2 {
+      margin-top: 0;
+      font-size: 2rem;
+      line-height: 1.2;
+    }
+
+    .cta-box p {
+      max-width: 52ch;
+      margin: 0 auto 22px;
+      color: #224140;
+    }
+
+    footer {
+      padding: 28px 0 42px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      text-align: center;
+    }
+
+    @media (max-width: 860px) {
+      .hero-grid,
+      .grid-3,
+      .split {
+        grid-template-columns: 1fr;
+      }
+
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-links a {
+        margin: 0 14px 0 0;
+      }
+
+      .hero {
+        padding-top: 46px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">Pocket <span>Positivity</span></div>
+      <nav class="nav-links">
+        <a href="#about">About</a>
+        <a href="#why">Why It Matters</a>
+        <a href="#how">How It Works</a>
+        <a href="#join">Get Involved</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Keep this. Share hope.</div>
+          <h1>Small cards.<br>Real encouragement.</h1>
+          <p>
+            Pocket Positivity is a simple project built on one idea: small acts of kindness can make a real difference.
+            By sharing thoughtful affirmation cards that fit in a pocket, wallet, or backpack, we hope to offer people
+            something steady to hold onto on an ordinary day or a difficult one.
+          </p>
+          <div class="buttons">
+            <a class="btn btn-primary" href="#join">See the purpose</a>
+            <a class="btn btn-secondary" href="#why">Why it matters</a>
+          </div>
+        </div>
+
+        <div class="card-preview">
+          <div class="mini-card">
+            <strong>Pocket Positivity</strong>
+            Even small steps can carry you somewhere meaningful. Progress does not need to be loud to be real.
+          </div>
+          <div class="mini-card">
+            <strong>Pocket Positivity</strong>
+            You bring something valuable to the people and places around you. The way you show up matters more than you know.
+          </div>
+          <div class="mini-card">
+            <strong>Pocket Positivity</strong>
+            Hope does not always arrive in dramatic ways. Sometimes it begins with one kind word and one reason to keep going.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <h2 class="section-title">About the project</h2>
+        <p class="section-intro">
+          Pocket Positivity was created to spread encouragement in a simple, human way. A card with a thoughtful message may seem small,
+          but small actions can stay with people. A few kind words tucked into a wallet, backpack, or notebook can become a reminder
+          that someone cared enough to offer hope.
+        </p>
+        <div class="grid-3">
+          <div class="panel">
+            <h3>Simple</h3>
+            <p>Short printed cards are easy to make, easy to share, and easy to keep close for the moments when they are needed most.</p>
+          </div>
+          <div class="panel">
+            <h3>Personal</h3>
+            <p>Each card carries a message that feels real, thoughtful, and grounded rather than generic or overly polished.</p>
+          </div>
+          <div class="panel">
+            <h3>Shareable</h3>
+            <p>One kind message can travel far. A card handed to one person can become something they pass on to someone else.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="why">
+      <div class="container">
+        <div class="highlight">
+          <h2 class="section-title">Mental health and the power of positivity</h2>
+          <p class="section-intro" style="margin-bottom:18px; max-width: none;">
+            Positivity does not mean pretending everything is easy. It means creating more room for hope, encouragement, and connection.
+            For many people, especially young people, daily stress can build quietly. Pressure, isolation, self-doubt, and overwhelm do not
+            always show on the outside. A small moment of affirmation cannot solve everything, but it can interrupt the feeling of being alone
+            in a hard moment.
+          </p>
+          <div class="split">
+            <div>
+              <p style="color: var(--muted); margin-top: 0;">
+                Kindness matters because it reminds people that they are seen. Encouragement matters because it can shift the tone of a day.
+                And positivity matters because hope is not trivial. Hope can help people pause, breathe, and remember that difficult feelings
+                are not the whole story.
+              </p>
+              <p style="color: var(--muted);">
+                Pocket Positivity is rooted in a simple belief: words have weight. A thoughtful message, offered at the right moment,
+                can help someone feel steadier, lighter, or more able to keep going.
+              </p>
+            </div>
+            <div>
+              <ul class="clean">
+                <li>Small actions can create real moments of connection.</li>
+                <li>Kind words can help counter stress, discouragement, and self-doubt.</li>
+                <li>Encouragement is not superficial. It can be grounding, sincere, and meaningful.</li>
+                <li>One card may seem small, but its impact may last longer than we realize.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="how">
+      <div class="container">
+        <h2 class="section-title">What this project is about</h2>
+        <p class="section-intro">
+          Pocket Positivity exists to remind people that encouragement is not small just because it is simple. The project uses short, meaningful messages to center hope, kindness, and emotional well-being in everyday life.
+        </p>
+        <div class="grid-3">
+          <div class="panel">
+            <h3>Encouragement that stays</h3>
+            <p>The cards are meant to be kept close in a wallet, pocket, backpack, or notebook so that a positive message is there when someone needs to see it again.</p>
+          </div>
+          <div class="panel">
+            <h3>Mental health matters</h3>
+            <p>Many people carry stress, loneliness, pressure, or self-doubt quietly. Pocket Positivity highlights the importance of caring for mental health with compassion, openness, and everyday support.</p>
+          </div>
+          <div class="panel">
+            <h3>Small actions count</h3>
+            <p>This project is built on the belief that even brief moments of kindness can matter. A thoughtful message may not fix everything, but it can help someone feel seen, supported, and less alone.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container split">
+        <div class="panel">
+          <h3>Why each small action matters</h3>
+          <p>
+            Big change often begins with small choices. A smile, a note, a kind message, or a quiet word of encouragement can shift how a person feels in that moment.
+            Pocket Positivity is built around that truth. You do not need a huge platform to do something meaningful. You can start with one card, one person,
+            and one act of care.
+          </p>
+        </div>
+        <div class="panel">
+          <h3>Who this is for</h3>
+          <p>
+            This project is for anyone who wants to spread encouragement in everyday life. Students, families, schools, clubs, youth groups, and community members can all take part.
+            Whether you share one card or one hundred, the message is the same: kindness is worth carrying forward.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="join" class="cta">
+      <div class="container">
+        <div class="cta-box">
+          <h2>Choose kindness on purpose</h2>
+          <p>
+            Pocket Positivity is a call to notice the quiet importance of mental health, encouragement, and human connection. Whether someone is having a difficult day or simply needs a reminder that goodness still exists, small acts of positivity can matter more than we realize. When we choose kindness on purpose, we help make everyday life a little more hopeful.
+          </p>
+          <div class="buttons" style="justify-content:center;">
+            <a class="btn btn-secondary" href="mailto:hello@pocketpositivity.org">Contact the project</a>
+            <a class="btn btn-primary" href="#about">Learn more</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      Pocket Positivity · Keep this. Share hope.<br>
+      A project built on the idea that small kindnesses can make a real difference.
+    </div>
+  </footer>
+</body>
+</html>
